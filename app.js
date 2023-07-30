@@ -26,8 +26,11 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser: true});
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+mongoose.connect("mongodb://localhost:27017/userDB", options);
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema ({
@@ -133,8 +136,12 @@ app.post("/submit", function(req, res){
 });
 
 app.get("/logout", function(req, res){
-  req.logout();
-  res.redirect("/");
+  req.logout(function(err){
+    if(err){return next(err);}
+    res.redirect("/");
+  });
+  
+  
 });
 
 app.post("/register", function(req, res){
