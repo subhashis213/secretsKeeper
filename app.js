@@ -30,7 +30,7 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-mongoose.connect("mongodb://localhost:27017/userDB", options);
+mongoose.connect("mongodb+srv://subhashissahu213:Kanha213@cluster.vmmbrnb.mongodb.net/?retryWrites=true&w=majority/userDB", options);
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema ({
